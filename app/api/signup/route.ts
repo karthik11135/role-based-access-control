@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
 
   const jwtToken = jwt.sign(
     { id: userCreated.id, role: userCreated.role },
-    'jwtSecret'
+    process.env.AUTH_SECRET as string
   );
 
   const response = NextResponse.json({ message: 'Logged in successfully' });

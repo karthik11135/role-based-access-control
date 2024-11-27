@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
       { status: 401 }
     );
 
-  const jwtToken = jwt.sign({ id: user.id, role: user.role }, 'jwtSecret');
+  const jwtToken = jwt.sign({ id: user.id, role: user.role }, process.env.AUTH_SECRET as string);
 
   const response = NextResponse.json({ message: 'Logged in successfully' });
 

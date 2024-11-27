@@ -20,7 +20,7 @@ export const verifyUserAction = async () => {
   if (!token) return false;
 
   try {
-    const decoded = jwt.verify(token.value, 'jwtSecret') as JwtPayload;
+    const decoded = jwt.verify(token.value, process.env.AUTH_SECRET as string) as JwtPayload;
     return { id: decoded.id, role: decoded.role };
   } catch (err) {
     console.log(err);

@@ -1,7 +1,7 @@
 import { userExists } from '@/actions/userActions';
 import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
-import GitHub from "next-auth/providers/github"
+import GitHub from 'next-auth/providers/github';
 import prisma from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 
@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [Google, GitHub],
-  secret: 'jwtSecret',
+  secret: process.env.AUTH_SECRET as string,
   session: {
     strategy: 'jwt',
   },
@@ -57,7 +57,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 
       try {
         // signing the token, so that it can be verified in server action
-        const encodedToken = jwt.sign(token as object, 'jwtSecret');
+        const encodedToken = jwt.sign(
+          token as object,
+          process.env.AUTH_SECRET as string
+        );
         return encodedToken;
       } catch (error) {
         throw new Error('Failed to encode token.');
