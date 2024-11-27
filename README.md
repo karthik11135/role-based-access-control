@@ -47,3 +47,8 @@ Admin: Can delete users and demote moderators to users.
 Moderator: Can look at all the other users.
 
 User: Can read the welcome message.
+
+
+# How does the app work 
+
+A user can sign up using their email and password or choose an Outh option which is Google or Github in this case. When the user signs up, their id and their role (user or moderator or admin) is stored in a jwt token and is sent to the client using cookies. Client can access routes if they have the cookie and otherwise not. Server always checks if the correct token is sent by verifying it. Passwords are hashed using bcrypt library before storing in the database. I've used NextAuth to implement Oauth and have used tailwind component libraries to make the website look decently well.
