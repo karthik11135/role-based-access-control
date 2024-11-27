@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+I've made several projects where I've incorporated Authentication and Authorization: 
 
-## Getting Started
+1. Deployed link : https://travelitenary.vercel.app/ , Github link : https://github.com/karthik11135/travelitenary ( Used NextAuth )
+2. Deployed link : https://socialize-eosin.vercel.app , Github link : https://github.com/karthik11135/socialize ( Used clerk )
+3. Deployed link : https://next-blog-iota-two.vercel.app/ , Github link : https://github.com/karthik11135/nextBlog ( Used NextAuth )
 
-First, run the development server:
+However I've not made any project where Role based access control was necessary. Hence I've made a new NextJS application focussing on all three aspects. 
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+This is a NEXTJS + Typescript + Postgres + TailwindCSS project which implements Authentication, Authorization and Role based Access control. 
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I've deployed the website here : https://rbcadassignment.vercel.app/
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+(email, password)
 
-## Learn More
+USER CREDENTIALS : user1@gmail.com , 123456
 
-To learn more about Next.js, take a look at the following resources:
+MODERATOR CREDS  : moderator8@gmail.com , 123456
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+ADMIN CREDS      : admin@gmail.com , 123456
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Oauth : Google, Github. 
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Role-Based Access Control (RBAC) System
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project implements a secure Authentication, Authorization, and Role-Based Access Control (RBAC) system using Next.js, NextAuth.js, and manual email-based authentication. It ensures that users can securely log in, register, and access resources based on their assigned roles.
+
+Features
+
+Authentication:
+
+OAuth integration using NextAuth.js for services like Google, Github.
+Custom email-based authentication with secure cookies (this was manually implemented).
+
+Authorization:
+
+Users are assigned one of the following roles upon registration and they are checked when they are accessing specific endpoints:
+Admin, User and Moderator
+Access to resources and routes is restricted based on roles.
+
+
+RBAC:
+
+Admin: Can delete users and demote moderators to users.
+
+Moderator: Can look at all the other users.
+
+User: Can read the welcome message.
