@@ -8,7 +8,7 @@ export default async function Home() {
   if (!res) {
     return (
       <div className="text-center mt-10">
-        Login to see the details
+        Login to see the details{" "}
         <Link href="/login" className="underline text-blue-500">
           login
         </Link>
