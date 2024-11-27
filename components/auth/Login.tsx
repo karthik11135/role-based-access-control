@@ -26,7 +26,10 @@ export function LoginForm() {
 
   const submitHandler: SubmitHandler<loginType> = async (data) => {
     try {
-      const res = await axios.post(`${process.env.DOMAIN_URL}/api/login`, data);
+      const res = await axios.post(
+        `https://rbcadassignment.vercel.app/api/login`,
+        data
+      );
       if (res) {
         router.refresh();
       }
