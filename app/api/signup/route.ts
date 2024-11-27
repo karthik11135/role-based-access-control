@@ -1,20 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { signupSchema } from '@/types/authSchema';
-import { cookies } from 'next/headers';
 import prisma from '@/lib/prisma';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-
-export const userExists = async (email: string) => {
-  const user = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-  });
-
-  if (!user) return false;
-  return user;
-};
+import { userExists } from '@/actions/userActions';
 
 export async function POST(req: NextRequest) {
   const signupData = await req.json();

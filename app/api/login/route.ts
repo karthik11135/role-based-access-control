@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { loginSchema } from '@/types/authSchema';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { userExists } from '../signup/route';
+import { userExists } from '@/actions/userActions';
 
 export async function POST(req: NextRequest) {
   const loginData = await req.json();
@@ -10,13 +10,13 @@ export async function POST(req: NextRequest) {
   const { success } = loginSchema.safeParse(loginData);
 
   if (!success)
-    return NextResponse.json({ message: 'Wrong inputs' }, { status: 401 });
+    return NextResponse.json({ message: 'Inputs are not the correct type' }, { status: 401 });
 
   const user = await userExists(loginData.email);
 
   if (!user)
     return NextResponse.json(
-      { message: 'User doesnt exists' },
+      { message: 'User does not exist' },
       { status: 401 }
     );
 
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
 
   if (!isPasswordCorrect)
     return NextResponse.json(
-      { message: 'Passwords are not matching' },
+      { message: 'Incorrect password' },
       { status: 401 }
     );
 

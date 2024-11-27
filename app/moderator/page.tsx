@@ -1,8 +1,9 @@
-import { getOnlyUsers, verifyModeratorAction } from '@/actions/helperActions';
-import { redirect } from 'next/navigation';
+import {  verifyModeratorAction } from '@/actions/verifyActions';
+import { getOnlyUsers } from '@/actions/userActions';
 import React from 'react';
 
 const page = async () => {
+  // Verifying if the user is a moderator
   const isMod = await verifyModeratorAction();
 
   if (!isMod) {
@@ -13,7 +14,7 @@ const page = async () => {
 
   const users = await getOnlyUsers();
 
-  if (!users) return null;
+  if (!users) return null
 
   return (
     <div>

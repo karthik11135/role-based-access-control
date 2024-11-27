@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { verifyUserAction } from '@/actions/helperActions';
+import { verifyUserAction } from '@/actions/verifyActions';
 import LogoutBtn from './LogoutBtn';
 
 const Navbar = async () => {

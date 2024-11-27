@@ -2,14 +2,14 @@
 import React, { useState } from 'react';
 import { Label } from '../ui/label';
 import { Input } from '../ui/input';
-import { cn } from '@/lib/utils';
-import { IconBrandGithub, IconBrandGoogle } from '@tabler/icons-react';
 import { useForm } from 'react-hook-form';
 import { signupType, signupSchema } from '@/types/authSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler } from 'react-hook-form';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { GithubBtn, Googlebtn } from './OauthBtns';
+import { BottomGradient, LabelInputContainer } from '../ui/auth-ui';
 
 export function SignupForm() {
   const {
@@ -117,57 +117,10 @@ export function SignupForm() {
 
         <div className="bg-gradient-to-r from-transparent via-neutral-700 dark:via-neutral-700 to-transparent my-8 h-[1px] w-full" />
 
-        <div className="flex flex-col space-y-4">
-          <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-slate-100 rounded-md h-10 font-medium shadow-input bg-zinc-900 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-300 dark:text-neutral-300" />
-            <span className="text-neutral-300 dark:text-neutral-300 text-sm">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className=" relative group/btn flex space-x-2 items-center justify-start px-4 w-full text-slate-200 rounded-md h-10 font-medium shadow-input bg-zinc-900 dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_var(--neutral-800)]"
-            type="submit"
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-300 dark:text-neutral-300" />
-            <span className="text-neutral-300 dark:text-neutral-300 text-sm">
-              Google
-            </span>
-            <BottomGradient />
-          </button>
-        </div>
+        <div className="flex flex-col space-y-4"></div>
       </form>
+      <Googlebtn />
+      <GithubBtn />
     </div>
   );
 }
-
-const BottomGradient = () => {
-  return (
-    <>
-      <span className="group-hover/btn:opacity-100 block transition duration-500 opacity-0 absolute h-px w-full -bottom-px inset-x-0 bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
-      <span className="group-hover/btn:opacity-100 blur-sm block transition duration-500 opacity-0 absolute h-px w-1/2 mx-auto -bottom-px inset-x-10 bg-gradient-to-r from-zinc-600 via-cyan-500 to-zinc-600" />
-    </>
-  );
-};
-
-const LabelInputContainer = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return (
-    <div
-      className={cn(
-        'flex text-slate-200 bg-black flex-col space-y-2 w-full',
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
-};

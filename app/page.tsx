@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { verifyUserAction, getUserDetails } from '@/actions/helperActions';
+import { verifyUserAction } from '@/actions/verifyActions';
+import { getUserDetails } from '@/actions/userActions';
 
 export default async function Home() {
   const res = await verifyUserAction();
@@ -23,10 +24,16 @@ export default async function Home() {
         {`Welcome ${getUserName.firstName} ${getUserName.lastName}`}
       </h1>
       <ul className="text-center border px-6 py-4 mx-auto rounded-md border-neutral-800 w-fit text-zinc-300">
-        <Link href="/admin" className="p-2 block hover:bg-neutral-900 rounded-md mx-auto tracking-tight w-fit font-bold cursor-pointer">
+        <Link
+          href="/admin"
+          className="p-2 block hover:bg-neutral-900 rounded-md mx-auto tracking-tight w-fit font-bold cursor-pointer"
+        >
           Admin Endpoint
-        </Link> 
-        <Link href="/moderator" className="p-2 block hover:bg-neutral-900 rounded-md mx-auto tracking-tight w-fit font-bold cursor-pointer">
+        </Link>
+        <Link
+          href="/moderator"
+          className="p-2 block hover:bg-neutral-900 rounded-md mx-auto tracking-tight w-fit font-bold cursor-pointer"
+        >
           Moderator Endpoint
         </Link>
       </ul>

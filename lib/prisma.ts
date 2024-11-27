@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 
+// instantiating prisma client for the NEXTJS app
+
 const prismaClientSingleton = () => {
   return new PrismaClient();
 };

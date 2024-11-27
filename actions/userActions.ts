@@ -1,51 +1,14 @@
 'use server';
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import prisma from '@/lib/prisma';
 import { cookies } from 'next/headers';
 import { Role } from '@prisma/client';
-import prisma from '@/lib/prisma';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 
-declare module 'jsonwebtoken' {
-  export interface JwtPayload {
-    id: number;
-    role: Role;
-  }
-}
+// USER SERVER ACTIONS
 
-export const verifyUserAction = async () => {
-  const cookieStore = cookies();
-  const token = cookieStore.get('token');
-
-  if (!token) return false;
-
-  try {
-    const decoded = jwt.verify(token.value, 'jwtSecret') as JwtPayload;
-    return { id: decoded.id, role: decoded.role };
-  } catch (err) {
-    return false;
-  }
-};
-
-export const verifyModeratorAction = async () => {
-  const isUser = await verifyUserAction();
-  if (!isUser || isUser.role === Role.USER) return false;
-  return true;
-};
-
-export const verifyAdminAction = async () => {
-  const isUser = await verifyUserAction();
-  if (!isUser || isUser.role !== Role.ADMIN) return false;
-  return true;
-};
-
-export const getUserDetails = async ({
-  id,
-  role,
-}: {
-  id: number;
-  role: Role;
-}) => {
+// get the details of users
+export const getUserDetails = async ({ id }: { id: number }) => {
   const user = await prisma.user.findUnique({
     where: {
       id,
@@ -58,6 +21,7 @@ export const getUserDetails = async ({
   });
   return { firstName: user?.firstName, lastName: user?.lastName };
 };
+
 
 export const logoutUser = () => {
   const cookieStore = cookies();
@@ -130,4 +94,15 @@ export const demoteUserAction = async (userId: number) => {
     return true;
   }
   return false;
+};
+
+export const userExists = async (email: string) => {
+  const user = await prisma.user.findFirst({
+    where: {
+      email,
+    },
+  });
+
+  if (!user) return false;
+  return user;
 };

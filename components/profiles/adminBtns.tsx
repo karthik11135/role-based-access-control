@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Role } from '@prisma/client';
-import { deleteUserAction, demoteUserAction } from '@/actions/helperActions';
+import { deleteUserAction, demoteUserAction } from '@/actions/userActions';
 import { useState } from 'react';
 
 interface userProfile {

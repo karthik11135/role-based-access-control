@@ -1,13 +1,15 @@
 import React from 'react';
 import Profiles from '@/components/profiles/Profiles';
-import { verifyAdminAction } from '@/actions/helperActions';
-import { redirect } from 'next/navigation';
+import { verifyAdminAction } from '@/actions/verifyActions';
 
 const page = async () => {
+  // Verifying if the user is admin
   const isAdmin = await verifyAdminAction();
 
   if (!isAdmin) {
-    return <p className="text-center mt-10">You do not have access to this page</p>
+    return (
+      <p className="text-center mt-10">You do not have access to this page</p>
+    );
   }
 
   return (

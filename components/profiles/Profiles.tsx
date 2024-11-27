@@ -1,6 +1,5 @@
-import { getAllUsersAndMods } from '@/actions/helperActions';
+import { getAllUsersAndMods } from '@/actions/userActions';
 import React from 'react';
-import { Role } from '@prisma/client';
 import AdminBtns from './adminBtns';
 
 const Profiles = async () => {
