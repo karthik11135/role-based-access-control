@@ -25,10 +25,7 @@ export function SignupForm() {
 
   const submitHandler: SubmitHandler<signupType> = async (data) => {
     try {
-      const res = await axios.post(
-        `https://rbcadassignment.vercel.app/api/signup`,
-        data
-      );
+      const res = await axios.post(`/api/signup`, data);
 
       if (res) {
         router.refresh();

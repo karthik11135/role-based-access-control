@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Googlebtn, GithubBtn } from './OauthBtns';
 import { BottomGradient, LabelInputContainer } from '../ui/auth-ui';
+import { domainLink } from './links';
 
 export function LoginForm() {
   const {
@@ -26,10 +27,7 @@ export function LoginForm() {
 
   const submitHandler: SubmitHandler<loginType> = async (data) => {
     try {
-      const res = await axios.post(
-        `https://rbcadassignment.vercel.app/api/login`,
-        data
-      );
+      const res = await axios.post(`/api/login`, data);
       if (res) {
         router.refresh();
       }
