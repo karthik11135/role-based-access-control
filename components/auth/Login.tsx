@@ -26,7 +26,7 @@ export function LoginForm() {
 
   const submitHandler: SubmitHandler<loginType> = async (data) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/login', data);
+      const res = await axios.post(`${process.env.DOMAIN_URL}/api/login`, data);
       if (res) {
         router.refresh();
       }

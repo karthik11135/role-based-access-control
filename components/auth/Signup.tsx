@@ -25,7 +25,10 @@ export function SignupForm() {
 
   const submitHandler: SubmitHandler<signupType> = async (data) => {
     try {
-      const res = await axios.post('http://localhost:3000/api/signup', data);
+      const res = await axios.post(
+        `${process.env.DOMAIN_URL}/api/signup`,
+        data
+      );
 
       if (res) {
         router.refresh();
